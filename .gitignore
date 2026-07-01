@@ -1,0 +1,4 @@
+work/
+.codex/
+*.log
+node_modules/
