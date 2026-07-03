@@ -239,7 +239,7 @@ function playSwipeAll(){for(var i=0;i<8;i++){(function(j){setTimeout(function(){
 function playHurt(){playSound(80,0.25,'sawtooth',0.15);}
 
 // ===== GAME ENGINE =====
-var PINCH_THRESH=0.08,FIST_CD=8000,SWIPE_CD=10000,ENEMY_SPEED_BASE=0.08;
+var PINCH_THRESH=0.08,FIST_CD=8000,SWIPE_CD=10000,ENEMY_SPEED_BASE=0.22;
 var gcv,gctx,camOverlay,camCtx,videoEl,gesture=null,hl=null;
 var state='idle',score=0,combo=0,maxCombo=0,hp=5,maxHp=5,kills=0;
 var wave=1,waveDuration=18000,wavePause=0;
@@ -301,7 +301,7 @@ function spawnEnemy(lane){
 enemies.push({
 lane:lane,x:laneOffsetX+lane*laneWidth+laneWidth/2,y:-30-60*Math.random(),
 speed:ENEMY_SPEED_BASE*(1+wave*0.15)+Math.random()*0.5,
-color:LANES[lane].color,size:16+Math.random()*8,hit:false,
+color:LANES[lane].color,size:30+Math.random()*14,hit:false,
 life:1+(wave>4?1:0)+(wave>8?1:0)
 });
 }
@@ -354,9 +354,11 @@ gctx.fillStyle=grad;gctx.fillRect(lx,0,laneWidth,ch);
 }
 function drawEnemies(){
 for(var i=0;i<enemies.length;i++){var e=enemies[i];
-gctx.save();gctx.globalAlpha=e.hit?0.3:0.9;gctx.fillStyle=e.color;gctx.shadowColor=e.color;gctx.shadowBlur=8;
-gctx.beginPath();gctx.moveTo(e.x,e.y-e.size);gctx.lineTo(e.x+e.size*0.7,e.y+e.size*0.5);gctx.lineTo(e.x-e.size*0.7,e.y+e.size*0.5);gctx.closePath();gctx.fill();
-gctx.fillStyle='rgba(255,255,255,.3)';gctx.beginPath();gctx.arc(e.x,e.y-e.size*0.3,e.size*0.35,0,Math.PI*2);gctx.fill();
+gctx.save();gctx.globalAlpha=e.hit?0.3:0.9;gctx.fillStyle=e.color;gctx.shadowColor=e.color;gctx.shadowBlur=10;var s=e.size;
+gctx.beginPath();gctx.moveTo(e.x,e.y-s*1.2);gctx.lineTo(e.x+s*.15,e.y-s*.3);gctx.lineTo(e.x+s*.15,e.y+s*.6);gctx.lineTo(e.x-s*.15,e.y+s*.6);gctx.lineTo(e.x-s*.15,e.y-s*.3);gctx.closePath();gctx.fill();
+gctx.beginPath();gctx.moveTo(e.x,e.y-s*.1);gctx.lineTo(e.x+s*.8,e.y+s*.35);gctx.lineTo(e.x-s*.8,e.y+s*.35);gctx.closePath();gctx.fill();
+gctx.beginPath();gctx.moveTo(e.x,e.y+s*.4);gctx.lineTo(e.x+s*.25,e.y+s*.85);gctx.lineTo(e.x-s*.25,e.y+s*.85);gctx.closePath();gctx.fill();
+gctx.fillStyle='rgba(255,255,255,.4)';gctx.beginPath();gctx.arc(e.x,e.y-s*.6,s*.12,0,Math.PI*2);gctx.fill();
 gctx.shadowBlur=0;gctx.restore();}
 }
 function drawProjectiles(){
