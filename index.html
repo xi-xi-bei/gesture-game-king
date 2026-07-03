@@ -239,7 +239,7 @@ function playSwipeAll(){for(var i=0;i<8;i++){(function(j){setTimeout(function(){
 function playHurt(){playSound(80,0.25,'sawtooth',0.15);}
 
 // ===== GAME ENGINE =====
-var PINCH_THRESH=0.08,FIST_CD=8000,SWIPE_CD=10000,ENEMY_SPEED_BASE=0.22;
+var PINCH_THRESH=0.08,FIST_CD=8000,SWIPE_CD=10000,ENEMY_SPEED_BASE=0.35;
 var gcv,gctx,camOverlay,camCtx,videoEl,gesture=null,hl=null;
 var state='idle',score=0,combo=0,maxCombo=0,hp=5,maxHp=5,kills=0;
 var wave=1,waveDuration=18000,wavePause=0;
