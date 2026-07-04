@@ -355,13 +355,18 @@ gctx.fillStyle=grad;gctx.fillRect(lx,0,laneWidth,ch);
 function drawEnemies(){
 for(var i=0;i<enemies.length;i++){var e=enemies[i];
 gctx.save();gctx.globalAlpha=e.hit?0.3:0.9;gctx.fillStyle=e.color;gctx.shadowColor=e.color;gctx.shadowBlur=10;var s=e.size;
-// Delta-wing fighter pointing DOWNWARD (nose at bottom, wings sweep back toward top)
+// Fuselage - streamlined body, nose at bottom pointing down
 gctx.beginPath();
-gctx.moveTo(e.x,e.y+s);gctx.lineTo(e.x+s*.7,e.y-s*.5);gctx.lineTo(e.x+s*.15,e.y-s*.5);
-gctx.lineTo(e.x+s*.15,e.y-s*.8);gctx.lineTo(e.x-s*.15,e.y-s*.8);gctx.lineTo(e.x-s*.15,e.y-s*.5);
-gctx.lineTo(e.x-s*.7,e.y-s*.5);gctx.closePath();gctx.fill();
-// Cockpit highlight near nose
-gctx.fillStyle='rgba(255,255,255,.35)';gctx.beginPath();gctx.arc(e.x,e.y+s*.35,s*.08,0,Math.PI*2);gctx.fill();
+gctx.moveTo(e.x,e.y+s*1.2);gctx.lineTo(e.x+s*.15,e.y+s*.3);gctx.lineTo(e.x+s*.15,e.y-s*.6);
+gctx.lineTo(e.x-s*.15,e.y-s*.6);gctx.lineTo(e.x-s*.15,e.y+s*.3);gctx.closePath();gctx.fill();
+// Wings
+gctx.beginPath();
+gctx.moveTo(e.x,e.y+s*.1);gctx.lineTo(e.x+s*.8,e.y-s*.35);gctx.lineTo(e.x-s*.8,e.y-s*.35);gctx.closePath();gctx.fill();
+// Tail fin
+gctx.beginPath();
+gctx.moveTo(e.x,e.y-s*.4);gctx.lineTo(e.x+s*.25,e.y-s*.85);gctx.lineTo(e.x-s*.25,e.y-s*.85);gctx.closePath();gctx.fill();
+// Cockpit highlight
+gctx.fillStyle='rgba(255,255,255,.4)';gctx.beginPath();gctx.arc(e.x,e.y+s*.6,s*.12,0,Math.PI*2);gctx.fill();
 gctx.shadowBlur=0;gctx.restore();}
 }
 function drawProjectiles(){
